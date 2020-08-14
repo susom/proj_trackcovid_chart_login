@@ -1,59 +1,69 @@
 {
-    "name": "TrackCOVID CHART EM",
-    "namespace": "Stanford\\TrackCovid\\ProjChart",
-    "description": "A Custom EM to manage conversion of invitations for the actual CHART project",
-    "documentation": "README.md",
-    "authors": [
-        {
-            "name": "Andrew Martin",
-            "email": "andy123@stanford.edu",
-            "institution": "Stanford University"
-        }
-    ],
-    "permissions": [
-        "redcap_survey_page_top",
-        "redcap_survey_complete"
-    ],
-    "framework-version": 4,
-    "enable-every-page-hooks-on-system-pages": false,
-    "links": {
+  "name": "CHART Login EM",
+  "namespace": "Stanford\\ChartLogin\\ChartLogin",
+  "description": "A Custom EM to manage conversion of invitations for the actual CHART project",
+  "documentation": "README.md",
+  "authors": [
+    {
+      "name": "Andrew Martin",
+      "email": "andy123@stanford.edu",
+      "institution": "Stanford University"
     },
-    "no-auth-pages": [
-      "ajax/verify",
-      "pages/verification_form"
-    ],
-    "project-settings": [
-        {
-            "key": "login-instrument",
-            "name": "<b>Login Survey</b>",
-            "required": true,
-            "type": "form-list"
-        },
-        {
-            "key": "login-instrument-event",
-            "name": "<b>Login Instrument Event</b>",
-            "required": true,
-            "type": "event-list"
-        },
-        {
-            "key": "enable-project-debug-logging",
-            "name": "<b>Enable Debug Logging</b><br><i>(optional)</i> Requires installation and configuration of emLogger",
-            "required": false,
-            "type": "checkbox"
-        }
-    ],
-    "system-settings": [
-        {
-            "key": "enable-system-debug-logging",
-            "name": "<b>Enable Debug Logging (system-wide)</b><i>(optional)</i> Requires installation and configuration of emLogger",
-            "required": false,
-            "type": "checkbox"
-        }
-    ],
-    "compatibility": {
-        "php-version-min": "",
-        "php-version-max": "",
-        "redcap-version-min": "",
-        "redcap-version-max": ""
+    {
+      "name": "Ihab Zeedia",
+      "email": "ihabz@stanford.edu",
+      "institution": "Stanford University"
     }
+  ],
+  "permissions": [
+    "redcap_survey_page_top",
+    "redcap_survey_complete"
+  ],
+  "framework-version": 4,
+  "enable-every-page-hooks-on-system-pages": false,
+  "links": {
+  },
+  "no-auth-pages": [
+    "ajax/index"
+  ],
+  "project-settings": [
+    {
+      "key": "login-instrument",
+      "name": "<b>Login Survey</b>",
+      "required": true,
+      "type": "form-list"
+    },
+    {
+      "key": "login-instrument-event",
+      "name": "<b>Login Instrument Event</b>",
+      "required": true,
+      "type": "event-list"
+    },
+    {
+      "key": "validation-field",
+      "name": "<b>Select the field that user information will be validated against.</b>",
+      "required": true,
+      "type": "field-list"
+    },
+    {
+      "key": "enable-project-debug-logging",
+      "name": "<b>Enable Debug Logging</b><br><i>(optional)</i> Requires installation and configuration of emLogger",
+      "required": false,
+      "type": "checkbox"
+    }
+  ],
+  "system-settings": [
+    {
+      "key": "enable-system-debug-logging",
+      "name": "<b>Enable Debug Logging (system-wide)</b><i>(optional)</i> Requires installation and configuration of emLogger",
+      "required": false,
+      "type": "checkbox"
+    }
+  ],
+  "compatibility": {
+    "php-version-min": "",
+    "php-version-max": "",
+    "redcap-version-min": "",
+    "redcap-version-max": ""
+  }
 }
