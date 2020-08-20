@@ -81,9 +81,9 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
 
     public function verifyCookie($name)
     {
-//        if(!isset($_COOKIE[$name])){
-//            return false;
-//        }
+        if (!isset($_COOKIE[$name])) {
+            return false;
+        }
 
         // when manager hits user page. they must be logged in and have right permission on redcap.
         if (defined('USERID') && isset($_GET[$this->getProjectSetting('validation-field')]) && self::isUserHasManagePermission()) {
