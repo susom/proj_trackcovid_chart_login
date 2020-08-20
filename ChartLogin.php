@@ -94,7 +94,7 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             $records = REDCap::getData($param);
             foreach ($records as $id => $record) {
                 if (filter_var($_GET[$this->getProjectSetting('validation-field')],
-                        FILTER_SANITIZE_STRING) == $record[$this->getFirstEventId()][$this->getProjectSetting('validation-field')]) {
+                        FILTER_SANITIZE_STRING) == $record[$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]) {
                     $this->setUserCookie('login',
                         $this->generateUniqueCodeHash(filter_var($_GET[$this->getProjectSetting('validation-field')],
                             FILTER_SANITIZE_STRING)));
@@ -105,11 +105,11 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             $param = array(
                 'project_id' => $this->getProjectId(),
                 'return_format' => 'array',
-                'events' => array_keys($this->getProject()->events['1']['events'])
+                'events' => [$this->getProjectSetting('login-instrument-event')]
             );
             $records = REDCap::getData($param);
             foreach ($records as $id => $record) {
-                $hash = $this->generateUniqueCodeHash($record[$this->getFirstEventId()][$this->getProjectSetting('validation-field')]);
+                $hash = $this->generateUniqueCodeHash($record[$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]);
                 if ($hash == $_COOKIE[$name]) {
                     return array('id' => $id, 'record' => $record);
                 }
@@ -127,7 +127,7 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             'project_id' => $this->getProjectId(),
             'return_format' => 'array',
             'record' => [$recordId],
-            'events' => $this->getFirstEventId()
+            'events' => $this->getProjectSetting('login-instrument-event')
         );
         $data = REDCap::getData($param);
         $dates = array('dob', 'zsfg_dob', 'birthdate');
@@ -135,12 +135,13 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             return false;
         } else {
             foreach ($dates as $date) {
-                $d = ($data[$recordId][$this->getFirstEventId()][$date]);
+                $d = ($data[$recordId][$this->getProjectSetting('login-instrument-event')][$date]);
                 if ($d != '') {
-                    $d = \DateTime::createFromFormat("Y-m-d", $data[$recordId][$this->getFirstEventId()][$date]);
+                    $d = \DateTime::createFromFormat("Y-m-d",
+                        $data[$recordId][$this->getProjectSetting('login-instrument-event')][$date]);
                     if ($d->format('Y-m-d') == $dob->format('Y-m-d')) {
                         $this->setUserCookie('login',
-                            $this->generateUniqueCodeHash($data[$recordId][$this->getFirstEventId()][$this->getProjectSetting('validation-field')]));
+                            $this->generateUniqueCodeHash($data[$recordId][$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]));
                         return $this->getSchedulerLink();
                     }
                 }
