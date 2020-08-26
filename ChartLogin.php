@@ -142,7 +142,7 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
                     if ($d->format('Y-m-d') == $dob->format('Y-m-d')) {
                         $this->setUserCookie('login',
                             $this->generateUniqueCodeHash($data[$recordId][$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]));
-                        return $this->getSchedulerLink();
+                        return $this->getSchedulerLink($recordId);
                     }
                 }
 
@@ -150,15 +150,15 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         }
     }
 
-    public function getSchedulerLink()
+    public function getSchedulerLink($recordId = '')
     {
         return $this->getScheduler()->getUrl('src/user', true,
-                true) . '&projectid=' . $this->getProjectId() . '&pid=' . $this->getProjectId() . '&NOAUTH';
+                true) . '&projectid=' . $this->getProjectId() . '&pid=' . $this->getProjectId() . '&NOAUTH&id=' . $recordId;
     }
 
-    public function redirectToScheduler()
+    public function redirectToScheduler($recordId)
     {
-        redirect($this->getSchedulerLink());
+        redirect($this->getSchedulerLink($recordId));
     }
 
     /**

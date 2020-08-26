@@ -22,7 +22,7 @@ try {
         <?php
     } else {
         // todo get link from another em.
-        $this->redirectToScheduler();
+        $this->redirectToScheduler($this->getRecordId());
     }
 } catch (\Exception $e) {
 
