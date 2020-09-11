@@ -24,7 +24,12 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         parent::__construct();
 
         if (isset($_GET['pid'])) {
-            $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance('chart_appointment_scheduler'));
+
+            $em = $this->getProjectSetting('redirect-em-name');
+            if (!$em) {
+                $em = 'chart_appointment_scheduler';
+            }
+            $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
             global $Proj;
 
             $this->setProject($Proj);
@@ -188,18 +193,12 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         return hash('sha256', $newuniq);
     }
 
-    /**
-     * @return \Stanford\ChartAppointmentScheduler\ChartAppointmentScheduler
-     */
     public function getScheduler()
     {
         return $this->scheduler;
     }
 
-    /**
-     * @param \Stanford\ChartAppointmentScheduler\ChartAppointmentScheduler $scheduler
-     */
-    public function setScheduler(\Stanford\ChartAppointmentScheduler\ChartAppointmentScheduler $scheduler)
+    public function setScheduler($scheduler)
     {
         $this->scheduler = $scheduler;
     }

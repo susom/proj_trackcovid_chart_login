@@ -27,22 +27,28 @@
     "ajax/index"
   ],
   "project-settings": [
-    {
-      "key": "login-instrument",
-      "name": "<b>Login Survey</b>",
-      "required": true,
-      "type": "form-list"
-    },
-    {
-      "key": "login-instrument-event",
-      "name": "<b>Login Instrument Event</b>",
-      "required": true,
-      "type": "event-list"
-    },
-    {
-      "key": "validation-field",
-      "name": "<b>Select the field that user information will be validated against.</b>",
-      "required": true,
+      {
+          "key": "login-instrument",
+          "name": "<b>Login Survey</b>",
+          "required": true,
+          "type": "form-list"
+      },
+      {
+          "key": "redirect-em-name",
+          "name": "<b>Scheduler EM where user will redirected after authentication</b>",
+          "required": true,
+          "type": "text"
+      },
+      {
+          "key": "login-instrument-event",
+          "name": "<b>Login Instrument Event</b>",
+          "required": true,
+          "type": "event-list"
+      },
+      {
+          "key": "validation-field",
+          "name": "<b>Select the field that user information will be validated against.</b>",
+          "required": true,
       "type": "field-list"
     },
     {
