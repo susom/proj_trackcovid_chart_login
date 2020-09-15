@@ -1,15 +1,15 @@
 {
-  "name": "CHART Login EM",
-  "namespace": "Stanford\\ChartLogin\\ChartLogin",
-  "description": "A Custom EM to manage conversion of invitations for the actual CHART project",
-  "documentation": "README.md",
-  "authors": [
-    {
-      "name": "Andrew Martin",
-      "email": "andy123@stanford.edu",
-      "institution": "Stanford University"
-    },
-    {
+    "name": "Scheduler Login EM",
+    "namespace": "Stanford\\ChartLogin\\ChartLogin",
+    "description": "A Custom EM to manage conversion of invitations for the actual CHART project",
+    "documentation": "README.md",
+    "authors": [
+        {
+            "name": "Andrew Martin",
+            "email": "andy123@stanford.edu",
+            "institution": "Stanford University"
+        },
+        {
       "name": "Ihab Zeedia",
       "email": "ihabz@stanford.edu",
       "institution": "Stanford University"
