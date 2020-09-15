@@ -1,7 +1,7 @@
 {
     "name": "Scheduler Login EM",
     "namespace": "Stanford\\ChartLogin\\ChartLogin",
-    "description": "A Custom EM to manage conversion of invitations for the actual CHART project",
+    "description": "A Custom EM to allow scheduler user to access their scheduler page.˚",
     "documentation": "README.md",
     "authors": [
         {
@@ -10,8 +10,8 @@
             "institution": "Stanford University"
         },
         {
-      "name": "Ihab Zeedia",
-      "email": "ihabz@stanford.edu",
+            "name": "Ihab Zeedia",
+            "email": "ihabz@stanford.edu",
       "institution": "Stanford University"
     }
   ],
