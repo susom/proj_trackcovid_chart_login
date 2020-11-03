@@ -34,6 +34,10 @@ CHART = {
         //     .insertAfter($('span.df'));
 
 
+        setTimeout(function () {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }, 500);
+
         $(document).on('click', '#verify-user', function (e) {
             e.stopPropagation();
             e.preventDefault();
