@@ -136,7 +136,9 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         );
         $data = REDCap::getData($param);
         $dates = array('dob', 'zsfg_dob', 'birthdate');
-        if (empty($data)) {
+
+        $withdraw = $data[$recordId][$this->getProjectSetting('login-instrument-event')]['withdraw'];
+        if (empty($data) || $withdraw) {
             return false;
         } else {
             foreach ($dates as $date) {
