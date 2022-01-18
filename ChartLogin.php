@@ -26,10 +26,10 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         if (isset($_GET['pid'])) {
 
             $em = $this->getProjectSetting('redirect-em-name');
-            if (!$em) {
-                $em = 'chart_appointment_scheduler';
+            if ($em) {
+                $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
             }
-            $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
+
             global $Proj;
 
             $this->setProject($Proj);
@@ -135,7 +135,12 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             'events' => $this->getProjectSetting('login-instrument-event')
         );
         $data = REDCap::getData($param);
-        $dates = array('dob', 'zsfg_dob', 'birthdate');
+        if ($this->getProjectSetting('input-fields') != '') {
+            $dates = json_decode($this->getProjectSetting('input-fields'), true);
+        } else {
+            $dates = array('dob', 'zsfg_dob', 'birthdate');
+        }
+
 
         $withdraw = $data[$recordId][$this->getProjectSetting('login-instrument-event')]['withdraw'];
         if (empty($data) || $withdraw) {

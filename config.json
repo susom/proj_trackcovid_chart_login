@@ -12,64 +12,70 @@
         {
             "name": "Ihab Zeedia",
             "email": "ihabz@stanford.edu",
-      "institution": "Stanford University"
-    }
-  ],
-  "permissions": [
-    "redcap_survey_page_top",
-    "redcap_survey_complete"
-  ],
-  "framework-version": 4,
-  "enable-every-page-hooks-on-system-pages": false,
-  "links": {
-  },
-  "no-auth-pages": [
-    "ajax/index"
-  ],
-  "project-settings": [
-      {
-          "key": "login-instrument",
-          "name": "<b>Login Survey</b>",
-          "required": true,
-          "type": "form-list"
-      },
-      {
-          "key": "redirect-em-name",
-          "name": "<b>Scheduler EM where user will redirected after authentication</b>",
-          "required": true,
-          "type": "text"
-      },
-      {
-          "key": "login-instrument-event",
-          "name": "<b>Login Instrument Event</b>",
-          "required": true,
-          "type": "event-list"
-      },
-      {
-          "key": "validation-field",
-          "name": "<b>Select the field that user information will be validated against.</b>",
-          "required": true,
-      "type": "field-list"
+            "institution": "Stanford University"
+        }
+    ],
+    "permissions": [
+        "redcap_survey_page_top",
+        "redcap_survey_complete"
+    ],
+    "framework-version": 4,
+    "enable-every-page-hooks-on-system-pages": false,
+    "links": {
     },
-    {
-      "key": "enable-project-debug-logging",
-      "name": "<b>Enable Debug Logging</b><br><i>(optional)</i> Requires installation and configuration of emLogger",
-      "required": false,
-      "type": "checkbox"
+    "no-auth-pages": [
+        "ajax/index"
+    ],
+    "project-settings": [
+        {
+            "key": "login-instrument",
+            "name": "<b>Login Survey</b>",
+            "required": true,
+            "type": "form-list"
+        },
+        {
+            "key": "redirect-em-name",
+            "name": "<b>Scheduler EM where user will redirected after authentication</b>",
+            "required": true,
+            "type": "text"
+        },
+        {
+            "key": "login-instrument-event",
+            "name": "<b>Login Instrument Event</b>",
+            "required": true,
+            "type": "event-list"
+        },
+        {
+            "key": "validation-field",
+            "name": "<b>Select the field that user information will be validated against.</b>",
+            "required": true,
+            "type": "field-list"
+        },
+        {
+            "key": "input-fields",
+            "name": "<b>JSON objects for fields used to verify provided info against REDCap record.</b>",
+            "required": false,
+            "type": "textarea"
+        },
+        {
+            "key": "enable-project-debug-logging",
+            "name": "<b>Enable Debug Logging</b><br><i>(optional)</i> Requires installation and configuration of emLogger",
+            "required": false,
+            "type": "checkbox"
+        }
+    ],
+    "system-settings": [
+        {
+            "key": "enable-system-debug-logging",
+            "name": "<b>Enable Debug Logging (system-wide)</b><i>(optional)</i> Requires installation and configuration of emLogger",
+            "required": false,
+            "type": "checkbox"
+        }
+    ],
+    "compatibility": {
+        "php-version-min": "",
+        "php-version-max": "",
+        "redcap-version-min": "",
+        "redcap-version-max": ""
     }
-  ],
-  "system-settings": [
-    {
-      "key": "enable-system-debug-logging",
-      "name": "<b>Enable Debug Logging (system-wide)</b><i>(optional)</i> Requires installation and configuration of emLogger",
-      "required": false,
-      "type": "checkbox"
-    }
-  ],
-  "compatibility": {
-    "php-version-min": "",
-    "php-version-max": "",
-    "redcap-version-min": "",
-    "redcap-version-max": ""
-  }
 }
