@@ -27,7 +27,11 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
 
             $em = $this->getProjectSetting('redirect-em-name');
             if ($em) {
-                $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
+                try {
+                    $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
+                } catch (\Exception $e) {
+                    $this->setScheduler(null);
+                }
             }
 
             global $Proj;
