@@ -58,6 +58,12 @@
             "type": "textarea"
         },
         {
+            "key": "failed-login-error-message",
+            "name": "<b>Error message displayed when login fail.</b>",
+            "required": false,
+            "type": "textarea"
+        },
+        {
             "key": "enable-project-debug-logging",
             "name": "<b>Enable Debug Logging</b><br><i>(optional)</i> Requires installation and configuration of emLogger",
             "required": false,

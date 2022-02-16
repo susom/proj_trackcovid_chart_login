@@ -8,7 +8,7 @@ try {
     $dob = filter_var($_POST['dob'], FILTER_SANITIZE_STRING);
     $recordId = filter_var($_POST['record_id'], FILTER_SANITIZE_STRING);
     if (!$link = $module->verifyUser($dob, $recordId)) {
-        throw new \LogicException("No user was found for provided information");
+        throw new \LogicException($module->getProjectSetting('failed-login-error-message') ?: "No user was found for provided information");
     } else {
         echo json_encode(array('status' => 'success', 'link' => $link));
     }
