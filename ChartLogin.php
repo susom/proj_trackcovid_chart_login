@@ -196,7 +196,7 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
     public function setUserCookie($name, $value, $time = 86406)
     {
         #day
-        setcookie($name, $value, time() + $time);
+        setcookie($name, $value, time() + $time, '/');
     }
 
     public function generateUniqueCodeHash($newuniq)
