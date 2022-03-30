@@ -174,7 +174,10 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
 
     public function redirectToScheduler($recordId)
     {
-        redirect($this->getSchedulerLink($recordId));
+//        redirect($this->getSchedulerLink($recordId));
+        $url = $this->getSchedulerLink($recordId);
+        header("Location: $url");
+        $this->exitAfterHook();
     }
 
     /**
