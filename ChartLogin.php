@@ -68,7 +68,6 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         if ($instrument == $loginInstrument && $event_id = $loginEventId) {
 
             $this->setRecordId($record);
-            $this->emDebug("Let's do this");
             $this->scheduleLogin();
         } else {
             $this->emDebug("Do nothing");
@@ -119,7 +118,7 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             $records = REDCap::getData($param);
             foreach ($records as $id => $record) {
                 $hash = $this->generateUniqueCodeHash($record[$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]);
-                if ($hash == $_COOKIE[$name]) {
+                if ($hash == $_COOKIE[$name] && $id == $this->getRecordId()) {
                     return array('id' => $id, 'record' => $record);
                 }
             }
