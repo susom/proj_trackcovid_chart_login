@@ -5,8 +5,8 @@ namespace Stanford\ChartLogin\ChartLogin;
 /** @var ChartLogin $module */
 
 try {
-    $dob = filter_var($_POST['dob'], FILTER_SANITIZE_STRING);
-    $recordId = filter_var($_POST['record_id'], FILTER_SANITIZE_STRING);
+    $dob = htmlspecialchars($_POST['verification_field']);
+    $recordId = htmlspecialchars($_POST['record_id']);
     if (!$link = $module->verifyUser($dob, $recordId)) {
         throw new \LogicException($module->getProjectSetting('failed-login-error-message') ?: "No user was found for provided information");
     } else {

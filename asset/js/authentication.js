@@ -42,11 +42,11 @@ CHART = {
             e.stopPropagation();
             e.preventDefault();
             e.stopImmediatePropagation();
-            var elem = $(document).find('input')[1];
-            var dob = $(elem).val();
+            var elem = $('input[name="verification_field"]');
+            var value = $(elem).val();
             $.ajax({
                 url: CHART.endpoint,
-                data: {dob: dob, record_id: CHART.recordId},
+                data: {verification_field: value, record_id: CHART.recordId},
                 type: 'POST'
             })
                 .done(function (response) {

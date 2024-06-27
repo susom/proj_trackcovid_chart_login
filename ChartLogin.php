@@ -58,10 +58,11 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         $survey_hash,
         $response_id = null,
         $repeat_instance = 1
-    ) {
+    )
+    {
 
         $loginInstrument = $this->getProjectSetting('login-instrument');
-        $loginEventId    = $this->getProjectSetting('login-instrument-event');
+        $loginEventId = $this->getProjectSetting('login-instrument-event');
 
 
         // Handle a redirect to the main project
@@ -75,7 +76,8 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
     }
 
 
-    private function scheduleLogin() {
+    private function scheduleLogin()
+    {
         // Insert CSS (hide the submit button)
         echo '<link rel="stylesheet" type="text/css" href="' .
             $this->getUrl('asset/css/authentication.css', true, true) .
@@ -127,9 +129,9 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         return false;
     }
 
-    public function verifyUser($dob, $recordId)
+    public function verifyUser($value, $recordId)
     {
-        $dob = \DateTime::createFromFormat("m-d-Y", $dob);
+        $dateValue = \DateTime::createFromFormat("m-d-Y", $value);
         //$filter = "[newuniq] = '" . strtoupper($newuniq) . "' AND [zipcode_abs] = '" . $zipcode_abs . "'";
         $param = array(
             'project_id' => $this->getProjectId(),
@@ -139,9 +141,9 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         );
         $data = REDCap::getData($param);
         if ($this->getProjectSetting('input-fields') != '') {
-            $dates = json_decode($this->getProjectSetting('input-fields'), true);
+            $validation_fields = json_decode($this->getProjectSetting('input-fields'), true);
         } else {
-            $dates = array('dob', 'zsfg_dob', 'birthdate');
+            $validation_fields = array('dob', 'zsfg_dob', 'birthdate');
         }
 
 
@@ -149,17 +151,28 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
         if (empty($data) || $withdraw) {
             return false;
         } else {
-            foreach ($dates as $date) {
-                $d = ($data[$recordId][$this->getProjectSetting('login-instrument-event')][$date]);
-                if ($d != '') {
-                    $d = \DateTime::createFromFormat("Y-m-d",
-                        $data[$recordId][$this->getProjectSetting('login-instrument-event')][$date]);
-                    if ($d->format('Y-m-d') == $dob->format('Y-m-d')) {
-                        $this->setUserCookie('login',
-                            $this->generateUniqueCodeHash($data[$recordId][$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]));
-                        return $this->getSchedulerLink($recordId);
+            foreach ($validation_fields as $field) {
+                // if user is loggin in with date
+                if ($dateValue != null) {
+                    $d = ($data[$recordId][$this->getProjectSetting('login-instrument-event')][$field]);
+                    if ($d != '') {
+                        $d = \DateTime::createFromFormat("Y-m-d",
+                            $data[$recordId][$this->getProjectSetting('login-instrument-event')][$field]);
+                        if ($d->format('Y-m-d') == $dateValue->format('Y-m-d')) {
+                            $this->setUserCookie('login',
+                                $this->generateUniqueCodeHash($data[$recordId][$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]));
+                            return $this->getSchedulerLink($recordId);
+                        }
                     }
+                }else{
+                    $v = ($data[$recordId][$this->getProjectSetting('login-instrument-event')][$field]);
+                    if ($v == $value) {
+                            $this->setUserCookie('login',
+                                $this->generateUniqueCodeHash($data[$recordId][$this->getProjectSetting('login-instrument-event')][$this->getProjectSetting('validation-field')]));
+                            return $this->getSchedulerLink($recordId);
+                        }
                 }
+
 
             }
         }
