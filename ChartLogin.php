@@ -29,6 +29,9 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
             if ($em) {
                 try {
                     $this->setScheduler(\ExternalModules\ExternalModules::getModuleInstance($em));
+                    if ($this->scheduler === null) {
+                        $this->emError("Scheduler module instance could not be initialized.");
+                    }
                 } catch (\Exception $e) {
                     $this->setScheduler(null);
                 }
@@ -180,15 +183,26 @@ class ChartLogin extends \ExternalModules\AbstractExternalModule
 
     public function getSchedulerLink($recordId = '')
     {
-        return $this->getScheduler()->getUrl('src/user', true,
+        $scheduler = $this->getScheduler();
+
+        if ($scheduler === null) {
+            $this->emError("Scheduler instance is null when trying to get URL.");
+            return null; // Or handle the error as needed
+        }
+
+        return $scheduler->getUrl('src/user', true,
                 true) . '&projectid=' . $this->getProjectId() . '&pid=' . $this->getProjectId() . '&NOAUTH&id=' . $recordId;
     }
 
     public function redirectToScheduler($recordId)
     {
-//        redirect($this->getSchedulerLink($recordId));
         $url = $this->getSchedulerLink($recordId);
-        header("Location: $url");
+        if ($url) {
+            header("Location: $url");
+        } else {
+            $this->emError("Cannot redirect to scheduler; URL is null.");
+            // Handle the error, possibly show a user-friendly message
+        }
         $this->exitAfterHook();
     }
 
