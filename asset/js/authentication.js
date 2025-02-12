@@ -39,7 +39,9 @@ CHART = {
         }, 500);
 
         // delete submit element
-        $(".surveysubmit").remove()
+        setTimeout(function(){
+            $(document).find('.surveysubmit').remove()
+        }, 100)
 
         $(document).on('click', '#verify-user', function (e) {
             e.stopPropagation();
